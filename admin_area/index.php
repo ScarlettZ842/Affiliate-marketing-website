@@ -1,10 +1,10 @@
-
 <?php
-$r = $_GET["tn"];
-if(!$_GET["tn"])
+if(!isset($_GET["tn"]) || empty($_GET["tn"]))
 {
   header("location:login.html");
+  exit();
 }
+$r = $_GET["tn"];
 
   include("includes/db.php");
    ?>

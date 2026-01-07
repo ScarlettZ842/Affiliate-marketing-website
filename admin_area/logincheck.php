@@ -10,7 +10,7 @@ if(!isset($_POST["text1"]))
 else
 {
 
- $con = mysqli_connect("localhost","root","","electronix");
+ $con = mysqli_connect("db","root","root","electronix");
 
  if(mysqli_connect_errno()){
   
