@@ -21,15 +21,9 @@ else if(!preg_match("/^[a-zA-Z]*$/",$name)||!preg_match("/^[1-9]*$/",$mobile_no|
       exit();      
 }
 else if (!filter_var($e_mail,FILTER_VALIDATE_EMAIL))
-{      
-      $sql="SELECT*FROM user WHERE e_mail='$e_mail'";
-      $result=mysqli_query($conn, $sql);
-      $resultcheck=mysqli_num_rows($result);
-      if($resultcheck > 0)
-      {
-      header("Location: ../register.php?register=email already exist");
-          exit(); 
-      }
+{
+      header("Location: ../register.php?register=invalid email");
+      exit();      
 }
 else if ($password1!=$password2)
 {
@@ -42,12 +36,20 @@ else if (strlen($mobile_no)!=10)
       exit(); 
 }
 else
-{
+{      
+      $sql="SELECT*FROM user WHERE user_name='$e_mail'";
+      $result=mysqli_query($conn, $sql);
+      $resultcheck=mysqli_num_rows($result);
+      if($resultcheck > 0)
+      {
+      header("Location: ../register.php?register=email already exist");
+          exit(); 
+      }
+
       $hashedPwd = password_hash($password2, PASSWORD_DEFAULT);  
       $sql="INSERT INTO user (name, user_name, password, gender, contact) VALUES ('$name','$e_mail', '$hashedPwd', '$gender', '$mobile_no');"; 
       $result1=mysqli_query($conn, $sql);  
-      $resultcheck1= mysqli_num_rows($result);
-               if($resultcheck1>=0){
+               if($result1){
                         
                         header("Location: ../login.php?login=sucess");
                        

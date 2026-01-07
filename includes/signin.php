@@ -26,7 +26,6 @@ else
 if($row=mysqli_fetch_assoc($result))
 {
 $PwdCheck = password_verify($pwd, $row['password']);
-         echo'<script>alert"$pwd"</script>';
 if($PwdCheck == false)
 {
 header("Location: ../login.php?login=error");

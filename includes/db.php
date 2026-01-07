@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect("localhost","root","","electronix");
+$conn = mysqli_connect("db","root","root","electronix");
 
 if(mysqli_connect_errno()){
 	

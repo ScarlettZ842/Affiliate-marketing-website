@@ -1,10 +1,11 @@
-﻿
 <?php
-
+ob_start();
+session_start();
 include("functions/functions.php");
 include("includes/db.php");
 
 cart();
+ob_end_flush();
 ?>
 
 
@@ -118,6 +119,7 @@ include("header.php");
    while($pprice = mysqli_fetch_array($run_price)){
 
       $pro_id = $pprice['p_id'];
+      $qty = $pprice['qty'];
       
       $prod_price = "select * from products where prd_id = '$pro_id'";
 
@@ -130,9 +132,10 @@ include("header.php");
          $product_title = $ppprice['prd_title'];
          $product_image = $ppprice['prd_img'];
          $single_price = $ppprice['prd_price'];
+         $line_total = $single_price * $qty;
          
 
-         $price_sum = array_sum($product_price);
+         $price_sum = array_sum($product_price) * $qty;
 
          $total +=$price_sum;
 
@@ -147,13 +150,13 @@ include("header.php");
     <img src="admin_area/product_images/<?php echo $product_image; ?>" width="60" height="60"></td>
    <td>
    
-   <input type="text" size="4" name="qty">
+   <input type="text" size="4" name="qty[<?php echo $pro_id; ?>]" value="<?php echo $qty; ?>">
    </td>
    <td>
    <?php echo "Rs".$single_price;  ?>
    </td>
   
-   <td></td>  
+   <td><?php echo "Rs".$line_total;  ?></td>  
    
  
  </tr>
@@ -177,7 +180,7 @@ include("header.php");
    <td colspan="2"><input type="submit" name="update_cart" value="Update cart"></td>
    
 
-   <td><input type="submit" name="continue" value="Continue Shopping"></td>
+   <td><button type="button" onclick="window.location.href='index.php'">Continue Shopping</button></td>
    
 
   <!-- <td><button><a href="checkout.php" style="text-decoration:none;color:black">Checkout</a></button></td> -->
@@ -198,11 +201,23 @@ include("header.php");
  
  if(isset($_POST['update_cart'])){
  
+   // Update quantities
+   if(isset($_POST['qty']) && is_array($_POST['qty'])){
+     foreach($_POST['qty'] as $pid => $quantity){
+       $quantity = intval($quantity);
+       if($quantity > 0){
+         $update_qty = "update cart set qty='$quantity' where p_id='$pid' AND ip_add='$ip'";
+         mysqli_query($con, $update_qty);
+       }
+     }
+   }
+ 
+   // Remove products
+   if(isset($_POST['remove']) && is_array($_POST['remove'])){
    foreach($_POST['remove'] as $remove){
    
        $delete_product = "delete from cart where p_id='$remove' AND ip_add='$ip'";
        $run_delete = mysqli_query($con, $delete_product);
-       echo $ip;
        if($run_delete){
        
          echo "<script>window.open('cart.php','_self')</script>"    ;  
@@ -210,7 +225,9 @@ include("header.php");
        }
    
    }
+   }
  
+   echo "<script>window.open('cart.php','_self')</script>";
  }
  
  ?>

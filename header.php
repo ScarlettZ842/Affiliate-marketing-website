@@ -1,5 +1,5 @@
 <?php
-session_start();
+// Session is started in the main page file
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

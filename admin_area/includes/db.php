@@ -1,5 +1,5 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","electronix");
+$con = mysqli_connect("db","root","root","electronix");
 
 ?>

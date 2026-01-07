@@ -1,8 +1,9 @@
-﻿
 <?php
-
+ob_start();
+session_start();
 include("functions/functions.php");
 include("includes/db.php");
+ob_end_flush();
 ?>
 
 

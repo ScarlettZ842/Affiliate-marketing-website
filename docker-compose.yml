@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:8.1-apache
+    container_name: affiliate_web
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - affiliate_network
+    command: >
+      bash -c "docker-php-ext-install mysqli && 
+      a2enmod rewrite && 
+      apache2-foreground"
+
+  db:
+    image: mysql:5.7
+    container_name: affiliate_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: electronix
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/db.sql:/docker-entrypoint-initdb.d/db.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - affiliate_network
+
+volumes:
+  db_data:
+
+networks:
+  affiliate_network:
+    driver: bridge
