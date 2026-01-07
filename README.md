@@ -55,6 +55,19 @@
    docker compose down -v
    ```
 
+### Web App User
+<img width="1410" height="742" alt="Screenshot 2026-01-06 at 23 21 48" src="https://github.com/user-attachments/assets/4996583a-8823-4299-8af6-d1ca35a06b69" />
+<img width="1408" height="740" alt="Screenshot 2026-01-06 at 23 21 57" src="https://github.com/user-attachments/assets/8ef089bf-1cb8-4bb0-9113-53ca55348cc3" />
+<img width="1420" height="745" alt="Screenshot 2026-01-06 at 23 22 07" src="https://github.com/user-attachments/assets/94d37cb7-84d6-480f-8c69-e3bb7780f825" />
+<img width="1412" height="740" alt="Screenshot 2026-01-06 at 23 22 24" src="https://github.com/user-attachments/assets/2d1827c4-a7ab-4e15-9c7d-dcf6b8e418c4" />
+<img width="1421" height="733" alt="Screenshot 2026-01-06 at 23 22 33" src="https://github.com/user-attachments/assets/2d0c0ab3-853c-422c-a734-aa481f2cde3b" />
+
+
+### Web App Admin
+<img width="1370" height="567" alt="Screenshot 2026-01-06 at 23 34 25" src="https://github.com/user-attachments/assets/93387eb3-a9f2-4511-b34a-7fec78371c3b" />
+<img width="1403" height="746" alt="Screenshot 2026-01-06 at 23 29 10" src="https://github.com/user-attachments/assets/a47b1d4c-2b14-49ca-b35d-0ab737382832" />
+
+
 ---
 
 ## Manual Installation (Without Docker)
